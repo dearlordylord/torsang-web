@@ -45,3 +45,5 @@ If your front-end is statically generated then you may also want to regenerate t
 ### Seed
 
 On boot, a seed script is included to create a user, a home page, and an example page with two versions, one published and one draft.
+
+.
