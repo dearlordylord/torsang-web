@@ -8,6 +8,7 @@ export const Media: CollectionConfig = {
     read: () => true
   },
   upload: {
+    disableLocalStorage: true,
     staticURL: '/media',
     staticDir: 'media',
     imageSizes: [
