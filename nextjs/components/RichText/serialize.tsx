@@ -85,7 +85,6 @@ const serialize = (children: Children): React.ReactElement[] =>
           </a>
         )
       case 'upload':
-        console.log('image src!!', process.env.NEXT_PUBLIC_CMS_URL + node.value.url)
         return (
           <>
             <Image alt={node.value.alt} src={process.env.NEXT_PUBLIC_CMS_URL + node.value.url} />

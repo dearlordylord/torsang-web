@@ -1,16 +1,16 @@
 import type { AfterChangeHook } from 'payload/dist/collections/config/types'
 
 // ensure that the home page is revalidated at '/' instead of '/home'
-export const formatAppURL = ({ doc }): string => {
+export const formatAppURL = ({ doc }, locale?: string): string => {
   const pathToUse = doc.slug === 'home' ? '' : doc.slug
   const { pathname } = new URL(`${process.env.PAYLOAD_PUBLIC_SITE_URL}/${pathToUse}`)
-  return pathname
+  return `${pathname}${locale ? `?locale=${locale}` : ''}`
 }
 
 // Revalidate the page in the background, so the user doesn't have to wait
 // Notice that the hook itself is not async and we are not awaiting `revalidate`
 export const revalidatePage: AfterChangeHook = ({ doc, req }) => {
-  const url = formatAppURL({ doc })
+  const url = formatAppURL({ doc }, req.locale)
 
   const revalidate = async (): Promise<void> => {
     try {
