@@ -34,4 +34,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Payload CMS deployment documentaton](https://payloadcms.com/docs/production/deployment) or the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-.
+## lint
+
+yarn lint -- --fix.
