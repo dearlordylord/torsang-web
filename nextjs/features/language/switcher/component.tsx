@@ -10,7 +10,6 @@ export const LanguageSwitcher = () => {
 
   return (
     <div>
-      <div>Current Language: {current}</div>
       <div>
         <select disabled={loading} value={current} onChange={handleLanguageChange}>
           {all.map(language => (
