@@ -27,21 +27,13 @@ export const seed = async (payload: Payload): Promise<void> => {
   const homepageJSON = JSON.parse(JSON.stringify(home).replace('{{DRAFT_PAGE_ID}}', examplePageID))
   const homepageThJSON = JSON.parse(JSON.stringify(homeTh).replace('{{DRAFT_PAGE_ID}}', examplePageID))
 
-  const enHomepage = await payload.create({
+  const [enHomepage] = await Promise.all([payload.create({
       collection: 'pages',
       data: homepageJSON,
       locale: 'en',
-    });
-
-  await payload.update({
-    id: enHomepage.id,
-    collection: 'pages',
-    data: homepageThJSON,
-    locale: 'th',
-  })
-
-  await payload.updateGlobal({
+    }), payload.updateGlobal({
     slug: 'main-menu',
+    locale: 'en',
     data: {
       navItems: [
         {
@@ -59,11 +51,49 @@ export const seed = async (payload: Payload): Promise<void> => {
               relationTo: 'pages',
               value: examplePageID,
             },
-            label: 'Example Page',
+            label: 'Example Page (en)',
             url: '',
           },
         },
       ],
     },
+  })]);
+
+  // has to go sequentially
+  await payload.updateGlobal({
+    slug: 'main-menu',
+    locale: 'th',
+    data: {
+      navItems: [
+        {
+          link: {
+            type: 'custom',
+            reference: null,
+            label: 'Dashboard',
+            url: 'http://localhost:8000/admin',
+          },
+        },
+        {
+          link: {
+            type: 'reference',
+            reference: {
+              relationTo: 'pages',
+              value: examplePageID,
+            },
+            label: 'Example Page (th)',
+            url: '',
+          },
+        },
+      ],
+    },
+  });
+
+  await payload.update({
+    id: enHomepage.id,
+    collection: 'pages',
+    data: homepageThJSON,
+    locale: 'th',
   })
+
+
 }

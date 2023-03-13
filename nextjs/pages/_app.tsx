@@ -1,21 +1,22 @@
 import React, { useCallback } from 'react'
 import { CookiesProvider } from 'react-cookie'
 import App, { AppContext, AppProps as NextAppProps } from 'next/app'
-import { useRouter } from 'next/router'
+import { NextRouter, useRouter } from 'next/router';
 
 import { Header } from '../components/Header'
 import { MainMenu } from '../payload-types'
 
 import '../css/app.scss'
+import { getLocaleOrDefault } from '../features/language/switcher/hook';
 
 export interface IGlobals {
   mainMenu: MainMenu
 }
 
-export const getAllGlobals = async (): Promise<IGlobals> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/globals/main-menu?depth=1`)
+export const getAllGlobals = async (router: NextRouter): Promise<IGlobals> => {
+  const locale = getLocaleOrDefault(router)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/globals/main-menu?depth=1&locale=${locale}`)
   const mainMenu = await res.json()
-
   return {
     mainMenu,
   }
@@ -65,7 +66,7 @@ const PayloadApp = (
 PayloadApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext)
 
-  const globals = await getAllGlobals()
+  const globals = await getAllGlobals(appContext.router)
 
   return {
     ...appProps,

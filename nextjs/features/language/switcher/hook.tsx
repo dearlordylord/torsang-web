@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useRouter } from 'next/router'
+import { NextRouter, useRouter } from 'next/router';
 
 interface LanguageSwitcher<Langs extends string[] = string[]> {
   current: Langs[number]
@@ -8,6 +8,11 @@ interface LanguageSwitcher<Langs extends string[] = string[]> {
   loading: boolean
 }
 
+export const getLocaleOrDefault = (router: NextRouter): string | undefined =>
+  router.locale || router.defaultLocale || router.locales[0]
+
+export const useLocaleOrDefault = () => getLocaleOrDefault(useRouter())
+
 export const useLanguageSwitcher = <
   Langs extends string[] = string[],
 >(): LanguageSwitcher<Langs> => {
@@ -15,9 +20,7 @@ export const useLanguageSwitcher = <
   // no need to clear on unmount also; it'll drop to 0 then
   const [calls, setCalls] = useState(0)
   const { locales, pathname, asPath } = router
-  const getLocaleOrDefault = (): string | undefined =>
-    router.locale || router.defaultLocale || locales[0]
-  const localeOrDefault = getLocaleOrDefault()
+  const localeOrDefault = useLocaleOrDefault()
 
   const [loading, setLoading] = useState(false)
 
