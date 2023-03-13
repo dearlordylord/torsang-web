@@ -4,7 +4,8 @@ import type { AfterChangeHook } from 'payload/dist/collections/config/types'
 export const formatAppURL = ({ doc }, locale?: string): string => {
   const pathToUse = doc.slug === 'home' ? '' : doc.slug
   const { pathname } = new URL(`${process.env.PAYLOAD_PUBLIC_SITE_URL}/${pathToUse}`)
-  return `${pathname}${locale ? `?locale=${locale}` : ''}`
+  // TODO will /en revalidate / and vice versa?
+  return `${locale ? `/${locale}` : ''}${pathname}`
 }
 
 // Revalidate the page in the background, so the user doesn't have to wait
