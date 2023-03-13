@@ -4,10 +4,10 @@ import App, { AppContext, AppProps as NextAppProps } from 'next/app'
 import { NextRouter, useRouter } from 'next/router'
 
 import { Header } from '../components/Header'
+import { getLocaleOrDefault } from '../features/language/switcher/hook'
 import { MainMenu } from '../payload-types'
 
 import '../css/app.scss'
-import { getLocaleOrDefault } from '../features/language/switcher/hook'
 
 export interface IGlobals {
   mainMenu: MainMenu
