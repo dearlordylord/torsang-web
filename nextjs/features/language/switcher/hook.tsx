@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { NextRouter, useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router'
 
 interface LanguageSwitcher<Langs extends string[] = string[]> {
   current: Langs[number]

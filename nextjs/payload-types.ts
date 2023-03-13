@@ -18,9 +18,9 @@ export interface Page {
   id: string
   title: string
   slug?: string
-  richText: {
+  richText: Array<{
     [k: string]: unknown
-  }[]
+  }>
   _status?: 'draft' | 'published'
   createdAt: string
   updatedAt: string
@@ -39,7 +39,7 @@ export interface User {
 }
 export interface MainMenu {
   id: string
-  navItems: {
+  navItems: Array<{
     link: {
       type?: 'reference' | 'custom'
       newTab?: boolean
@@ -51,5 +51,5 @@ export interface MainMenu {
       label: string
     }
     id?: string
-  }[]
+  }>
 }
