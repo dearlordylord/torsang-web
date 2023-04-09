@@ -24,9 +24,10 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ children }) => {
         </Link>
         <div className={classes.languageAndNavWrap}>
           {children}
-          <div className={classes.languageSelectorWrap}><LanguageSwitcher /></div>
+          <div className={classes.languageSelectorWrap}>
+            <LanguageSwitcher />
+          </div>
         </div>
-
       </Gutter>
     </div>
   )

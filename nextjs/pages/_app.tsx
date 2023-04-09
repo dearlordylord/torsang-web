@@ -3,14 +3,14 @@ import { CookiesProvider } from 'react-cookie'
 import App, { AppContext, AppProps as NextAppProps } from 'next/app'
 import { NextRouter, useRouter } from 'next/router'
 
+import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { getLocaleOrDefault } from '../features/language/switcher/hook'
 import { MainMenu } from '../payload-types'
 
 import '../css/app.scss'
-import { Footer } from '../components/Footer';
 
-import styles from './index.module.scss';
+import styles from './index.module.scss'
 
 export interface IGlobals {
   mainMenu: MainMenu
@@ -64,7 +64,9 @@ const PayloadApp = (
             onPreviewExit,
           }}
         />
-        <main className={styles.main}><Component {...pageProps} /></main>
+        <main className={styles.main}>
+          <Component {...pageProps} />
+        </main>
         <Footer />
       </div>
     </CookiesProvider>

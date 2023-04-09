@@ -3,5 +3,5 @@ module.exports = {
   extends: ['plugin:@next/next/recommended', '@payloadcms'],
   rules: {
     'no-console': 'off',
-  }
+  },
 }

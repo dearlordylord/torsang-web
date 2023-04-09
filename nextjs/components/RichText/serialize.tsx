@@ -2,7 +2,8 @@ import React, { Fragment } from 'react'
 import escapeHTML from 'escape-html'
 import Image from 'next/image'
 import { Text } from 'slate'
-import { LocationMap } from '../Map';
+
+import { LocationMap } from '../Map'
 
 // eslint-disable-next-line no-use-before-define
 type Children = Leaf[]
@@ -19,17 +20,15 @@ type Leaf = {
 }
 
 const SPECIAL_TAGS = {
-  '{{map}}': LocationMap
-} as const;
+  '{{map}}': LocationMap,
+} as const
 
 const serialize = (children: Children): React.ReactElement[] =>
   children.map((node, i) => {
-
     if (Text.isText(node)) {
+      const Element = SPECIAL_TAGS[node.text as keyof typeof SPECIAL_TAGS]
 
-      const Element = SPECIAL_TAGS[node.text as keyof typeof SPECIAL_TAGS];
-
-      if (Element) return <Element />;
+      if (Element) return <Element />
 
       let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />
 
@@ -98,7 +97,12 @@ const serialize = (children: Children): React.ReactElement[] =>
       case 'upload':
         return (
           <>
-            <Image width={200} height={200} alt={node.value.alt} src={process.env.NEXT_PUBLIC_CMS_URL + node.value.url} />
+            <Image
+              width={200}
+              height={200}
+              alt={node.value.alt}
+              src={process.env.NEXT_PUBLIC_CMS_URL + node.value.url}
+            />
             {serialize(node.children)}
           </>
         )
