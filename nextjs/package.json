@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "country-flag-icons": "^1.5.7",
     "escape-html": "^1.0.3",
     "next": "^13.1.6",
     "payload-admin-bar": "^1.0.5",

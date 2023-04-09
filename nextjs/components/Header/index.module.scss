@@ -3,6 +3,7 @@
 .header {
   padding: var(--base) 0;
   z-index: var(--header-z-index);
+  width: 100%;
 }
 
 .wrap {
@@ -16,3 +17,12 @@
     margin-left: var(--base);
   }
 }
+
+.languageAndNavWrap {
+  display: flex;
+}
+
+.languageSelectorWrap {
+  margin-left: 10px;
+}
+

@@ -10,7 +10,7 @@
   --scrollbar-width: 17px;
 
   --base: 24px;
-  --font-body: system-ui;
+  --font-body: Source Sans Pro,Helvetica,Arial,sans-serif;
   --font-mono: 'Roboto Mono', monospace;
 
   --gutter-h: 180px;
@@ -45,16 +45,26 @@ html {
 }
 
 html,
-body,
-#app {
+#app,
+#__next {
   height: 100%;
 }
 
 body {
   font-family: var(--font-body);
-  color: var(--color-black);
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  color: var(--color-foreground-primary);
+  font-size: 1rem;
+  font-display: swap;
+  overflow-x: hidden;
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
 }
+
 
 ::selection {
   background: var(--color-green);

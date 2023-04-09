@@ -8,6 +8,9 @@ import { getLocaleOrDefault } from '../features/language/switcher/hook'
 import { MainMenu } from '../payload-types'
 
 import '../css/app.scss'
+import { Footer } from '../components/Footer';
+
+import styles from './index.module.scss';
 
 export interface IGlobals {
   mainMenu: MainMenu
@@ -51,16 +54,19 @@ const PayloadApp = (
 
   return (
     <CookiesProvider>
-      <Header
-        globals={globals}
-        adminBarProps={{
-          collection,
-          id,
-          preview,
-          onPreviewExit,
-        }}
-      />
-      <Component {...pageProps} />
+      <div className={styles.wrapper}>
+        <Header
+          globals={globals}
+          adminBarProps={{
+            collection,
+            id,
+            preview,
+            onPreviewExit,
+          }}
+        />
+        <main className={styles.main}><Component {...pageProps} /></main>
+        <Footer />
+      </div>
     </CookiesProvider>
   )
 }

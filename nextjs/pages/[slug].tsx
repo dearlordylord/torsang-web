@@ -15,15 +15,12 @@ const Page: React.FC<
     preview?: boolean
   }
 > = props => {
-  const { title, richText } = props
-
+  const { title, richText, slug } = props
   return (
-    <main>
-      <Gutter>
-        <h1 className={classes.hero}>{title}</h1>
-        <RichText content={richText} />
-      </Gutter>
-    </main>
+    <Gutter>
+      {slug === 'home' ? null : <h1 className={classes.hero}>{title}</h1>}
+      <RichText content={richText} />
+    </Gutter>
   )
 }
 

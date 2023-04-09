@@ -1,0 +1,18 @@
+.languageFlag {
+  font-size: 40px;
+  text-decoration: none;
+}
+
+.languageFlagCurrent {
+  opacity: 1;
+  pointer-events: none;
+  cursor: none;
+}
+
+.languageFlagNotCurrent {
+  opacity: 0.5;
+}
+
+.languageFlagLoading {
+  opacity: 0.1;
+}

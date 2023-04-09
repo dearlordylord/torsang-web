@@ -17,15 +17,18 @@ type HeaderBarProps = {
 
 export const HeaderBar: React.FC<HeaderBarProps> = ({ children }) => {
   return (
-    <header className={classes.header}>
+    <div className={classes.header}>
       <Gutter className={classes.wrap}>
         <Link href="/">
           <Logo />
         </Link>
-        <LanguageSwitcher />
-        {children}
+        <div className={classes.languageAndNavWrap}>
+          {children}
+          <div className={classes.languageSelectorWrap}><LanguageSwitcher /></div>
+        </div>
+
       </Gutter>
-    </header>
+    </div>
   )
 }
 
@@ -46,7 +49,7 @@ export const Header: React.FC<{
   const hasNavItems = navItems && Array.isArray(navItems) && navItems.length > 0
 
   return (
-    <div>
+    <header className={classes.header}>
       <AdminBar adminBarProps={adminBarProps} user={user} setUser={setUser} />
       <HeaderBar>
         {hasNavItems && (
@@ -57,6 +60,6 @@ export const Header: React.FC<{
           </nav>
         )}
       </HeaderBar>
-    </div>
+    </header>
   )
 }

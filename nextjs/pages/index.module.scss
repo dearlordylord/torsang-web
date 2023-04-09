@@ -1,9 +1,23 @@
 @import '../css/queries.scss';
 
 .hero {
-  padding-top: calc(var(--base) * 1.5);
+  // padding-top: calc(var(--base) * 1.5);
 
   @include mid-break {
     padding-top: var(--base);
   }
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  max-width: 1200px;
+}
+
+

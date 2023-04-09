@@ -1,0 +1,31 @@
+.footer {
+  flex-shrink: 0;
+  background-color: var(--color-background);
+  width: 100%;
+}
+
+.footerPicture {
+
+  margin: 20px auto;
+}
+
+.footerInner {
+  background-color: var(--color-main);
+}
+
+.footerContent {
+  padding: 30px 0;
+  @media only screen and (min-width: 48rem) {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  color: #fff;
+  text-align: center;
+}
+
+.footerCopyright {
+  font-size: .875rem;
+  letter-spacing: .3px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
