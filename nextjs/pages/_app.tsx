@@ -11,8 +11,8 @@ import { MainMenu } from '../payload-types'
 import '../css/app.scss'
 
 import styles from './index.module.scss'
-import Head from 'next/head';
-import Script from 'next/script';
+import Head from 'next/head'
+import Script from 'next/script'
 
 export interface IGlobals {
   mainMenu: MainMenu
@@ -57,7 +57,10 @@ const PayloadApp = (
   return (
     <CookiesProvider>
       <Head>
-        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-V6VZ2D1FER" />
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-V6VZ2D1FER"
+        />
         <Script strategy="afterInteractive">
           {`
 window.dataLayer = window.dataLayer || [];

@@ -1,6 +1,4 @@
-# Preview Example Front-End
-
-This is a [Next.js](https://nextjs.org/) app made explicitly for Payload's [Preview Example](https://github.com/payloadcms/payload/tree/master/examples/preview/cms).
+Deployed on Vercel on push
 
 ## Getting Started
 
