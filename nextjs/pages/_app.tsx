@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { CookiesProvider } from 'react-cookie'
 import App, { AppContext, AppProps as NextAppProps } from 'next/app'
 import { NextRouter, useRouter } from 'next/router'
+import Script from 'next/script'
 
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
@@ -11,8 +12,6 @@ import { MainMenu } from '../payload-types'
 import '../css/app.scss'
 
 import styles from './index.module.scss'
-import Head from 'next/head'
-import Script from 'next/script'
 
 export interface IGlobals {
   mainMenu: MainMenu
@@ -56,12 +55,12 @@ const PayloadApp = (
 
   return (
     <CookiesProvider>
-      <Head>
+      <>
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-V6VZ2D1FER"
         />
-        <Script strategy="afterInteractive">
+        <Script id="analytics-script" strategy="afterInteractive">
           {`
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -70,7 +69,7 @@ gtag('js', new Date());
 gtag('config', 'G-V6VZ2D1FER');
           `}
         </Script>
-      </Head>
+      </>
       <div className={styles.wrapper}>
         <Header
           globals={globals}
