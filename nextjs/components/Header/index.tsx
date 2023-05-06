@@ -55,9 +55,7 @@ export const Header: React.FC<{
       <HeaderBar>
         {hasNavItems && (
           <nav className={classes.nav}>
-            {navItems.map(({ link }, i) => {
-              return <CMSLink key={i} {...link} />
-            })}
+            {navItems.map(({ link }, i) => <CMSLink key={i} {...link} className={classes.headerLinkAnchor} />)}
           </nav>
         )}
       </HeaderBar>
