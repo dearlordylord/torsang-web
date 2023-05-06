@@ -1,4 +1,6 @@
 .logo {
   width: var(--css-logo-size-px)px;
   height: var(--css-logo-size-px)px;
+  min-width: var(--css-logo-size-px)px;
+  min-height: var(--css-logo-size-px)px;
 }
