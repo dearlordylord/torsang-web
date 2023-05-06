@@ -16,14 +16,16 @@ const assertExists = <T,>(value: T | null | undefined): T => {
 }
 
 const getCssLogoSize = () =>
-  parseInt(
-    assertExists(
-      assertExists(document.querySelector(':root') as HTMLBaseElement).style.getPropertyValue(
-        CSS_LOGO_CSS_PROPERTY_NAME,
-      ),
-    ),
-    10,
-  )
+  typeof window !== 'undefined'
+    ? parseInt(
+        assertExists(
+          assertExists(document.querySelector(':root') as HTMLBaseElement).style.getPropertyValue(
+            CSS_LOGO_CSS_PROPERTY_NAME,
+          ),
+        ),
+        10,
+      )
+    : 60 /*ssr; TODO we could also validate against css value*/
 
 export const Logo = ({ className }: { className?: string }) => {
   const cssLogoSize = getCssLogoSize()
