@@ -20,7 +20,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ children }) => {
     <div className={classes.header}>
       <Gutter className={classes.wrap}>
         <Link href="/">
-          <Logo className={classes.logo} />
+          <Logo />
         </Link>
         <div className={classes.languageAndNavWrap}>
           {children}
