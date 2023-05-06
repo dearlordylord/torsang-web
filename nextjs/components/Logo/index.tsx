@@ -19,9 +19,9 @@ const getCssLogoSize = () =>
   typeof window !== 'undefined'
     ? parseInt(
         assertExists(
-          assertExists(document.querySelector(':root') as HTMLBaseElement).style.getPropertyValue(
-            CSS_LOGO_CSS_PROPERTY_NAME,
-          ),
+          window
+            .getComputedStyle(assertExists(document.querySelector(':root') as HTMLBaseElement))
+            .getPropertyValue(CSS_LOGO_CSS_PROPERTY_NAME),
         ),
         10,
       )
