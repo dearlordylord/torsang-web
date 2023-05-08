@@ -5,11 +5,11 @@ import { ParsedUrlQuery } from 'querystring'
 
 import { Gutter } from '../components/Gutter'
 import RichText from '../components/RichText'
+import { Children } from '../components/RichText/serialize'
 import { LightboxContextProvider } from '../features/lightbox/provider'
 import type { MainMenu, Page as PageType } from '../payload-types'
 
 import classes from './index.module.scss'
-import { Children } from '../components/RichText/serialize'
 
 const Page: React.FC<
   PageType & {
