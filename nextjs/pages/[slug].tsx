@@ -9,6 +9,7 @@ import { LightboxContextProvider } from '../features/lightbox/provider'
 import type { MainMenu, Page as PageType } from '../payload-types'
 
 import classes from './index.module.scss'
+import { Children } from '../components/RichText/serialize';
 
 const Page: React.FC<
   PageType & {
@@ -21,7 +22,7 @@ const Page: React.FC<
     <Gutter>
       {slug === 'home' ? null : <h1 className={classes.hero}>{title}</h1>}
       <LightboxContextProvider>
-        <RichText content={richText} />
+        <RichText content={richText as Children} />
       </LightboxContextProvider>
     </Gutter>
   )
