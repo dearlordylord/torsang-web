@@ -1,3 +1,1 @@
-export const Lightbox = () => {
-
-}
+export const Lightbox = () => {}

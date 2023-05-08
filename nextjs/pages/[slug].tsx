@@ -1,14 +1,14 @@
-import React from 'react';
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import QueryString from 'qs';
-import { ParsedUrlQuery } from 'querystring';
+import React from 'react'
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
+import QueryString from 'qs'
+import { ParsedUrlQuery } from 'querystring'
 
-import { Gutter } from '../components/Gutter';
-import RichText from '../components/RichText';
-import type { MainMenu, Page as PageType } from '../payload-types';
+import { Gutter } from '../components/Gutter'
+import RichText from '../components/RichText'
+import { LightboxContextProvider } from '../features/lightbox/provider'
+import type { MainMenu, Page as PageType } from '../payload-types'
 
-import classes from './index.module.scss';
-import { LightboxContextProvider } from '../features/lightbox/provider';
+import classes from './index.module.scss'
 
 const Page: React.FC<
   PageType & {

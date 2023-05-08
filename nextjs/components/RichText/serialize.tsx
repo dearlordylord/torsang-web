@@ -1,10 +1,10 @@
-import React, { FC, Fragment, useCallback } from 'react';
+import React, { FC, Fragment, useCallback } from 'react'
 import escapeHTML from 'escape-html'
 import Image from 'next/image'
 import { Text } from 'slate'
 
+import useNextjsLightbox from '../../features/lightbox/nextjsUseLightbox'
 import { LocationMap } from '../Map'
-import useNextjsLightbox from '../../features/lightbox/nextjsUseLightbox';
 
 // eslint-disable-next-line no-use-before-define
 export type Children = Leaf[]
@@ -25,15 +25,18 @@ const SPECIAL_TAGS = {
 } as const
 
 const ImageC = (props: React.ComponentProps<typeof Image>) => {
-  const { open } = useNextjsLightbox();
-  const onClick = useCallback((e: Parameters<React.ComponentProps<typeof Image>['onClick']>[0]) => {
-    if (props.onClick) props.onClick(e);
-    open(typeof props.src === 'string' ? props.src : 'src TODO');
-  }, [open, props.onClick, props.src])
-  return (
-    <Image {...props} onClick={onClick} />
+  const { open } = useNextjsLightbox()
+  const onClick_ = props.onClick
+  const src_ = props.src
+  const onClick = useCallback(
+    (e: Parameters<React.ComponentProps<typeof Image>['onClick']>[0]) => {
+      if (onClick_) onClick_(e)
+      open(typeof src_ === 'string' ? src_ : 'src TODO')
+    },
+    [open, onClick_, src_],
   )
-};
+  return <Image {...props} onClick={onClick} />
+}
 
 const serialize = (children: Children): React.ReactElement[] =>
   children.map((node, i) => {
