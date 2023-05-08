@@ -1,12 +1,13 @@
-import React, { Fragment } from 'react'
+import React, { FC, Fragment, useCallback } from 'react';
 import escapeHTML from 'escape-html'
 import Image from 'next/image'
 import { Text } from 'slate'
 
 import { LocationMap } from '../Map'
+import useNextjsLightbox from '../../features/lightbox/nextjsUseLightbox';
 
 // eslint-disable-next-line no-use-before-define
-type Children = Leaf[]
+export type Children = Leaf[]
 
 type Leaf = {
   type: string
@@ -22,6 +23,17 @@ type Leaf = {
 const SPECIAL_TAGS = {
   '{{map}}': LocationMap,
 } as const
+
+const ImageC = (props: React.ComponentProps<typeof Image>) => {
+  const { open } = useNextjsLightbox();
+  const onClick = useCallback((e: Parameters<React.ComponentProps<typeof Image>['onClick']>[0]) => {
+    if (props.onClick) props.onClick(e);
+    open(typeof props.src === 'string' ? props.src : 'src TODO');
+  }, [open, props.onClick, props.src])
+  return (
+    <Image {...props} onClick={onClick} />
+  )
+};
 
 const serialize = (children: Children): React.ReactElement[] =>
   children.map((node, i) => {
@@ -97,7 +109,8 @@ const serialize = (children: Children): React.ReactElement[] =>
       case 'upload':
         return (
           <>
-            <Image
+            {/*TODO dedupe 1aa*/}
+            <ImageC
               width={200}
               height={200}
               alt={node.value.alt}

@@ -1,13 +1,14 @@
-import React from 'react'
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
-import QueryString from 'qs'
-import { ParsedUrlQuery } from 'querystring'
+import React from 'react';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import QueryString from 'qs';
+import { ParsedUrlQuery } from 'querystring';
 
-import { Gutter } from '../components/Gutter'
-import RichText from '../components/RichText'
-import type { MainMenu, Page as PageType } from '../payload-types'
+import { Gutter } from '../components/Gutter';
+import RichText from '../components/RichText';
+import type { MainMenu, Page as PageType } from '../payload-types';
 
-import classes from './index.module.scss'
+import classes from './index.module.scss';
+import { LightboxContextProvider } from '../features/lightbox/provider';
 
 const Page: React.FC<
   PageType & {
@@ -19,7 +20,9 @@ const Page: React.FC<
   return (
     <Gutter>
       {slug === 'home' ? null : <h1 className={classes.hero}>{title}</h1>}
-      <RichText content={richText} />
+      <LightboxContextProvider>
+        <RichText content={richText} />
+      </LightboxContextProvider>
     </Gutter>
   )
 }
