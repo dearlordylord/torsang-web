@@ -106,7 +106,7 @@ const serialize = (children: Children): React.ReactElement[] =>
       case 'li':
         return <li key={i}>{serialize(node.children)}</li>
       case 'link':
-        const isYoutube = node.url?.includes('youtube.com')
+        const isYoutube = node.url?.includes('youtube.com') || node.url?.includes('youtu.be')
         if (isYoutube) {
           return <ReactPlayer url={escapeHTML(node.url)} />
         }
