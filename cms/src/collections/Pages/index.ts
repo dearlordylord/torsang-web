@@ -5,22 +5,24 @@ import { defaultAccess } from '../access/default'
 import formatSlug from './hooks/formatSlug'
 import { formatAppURL, revalidatePage } from './hooks/revalidatePage'
 
-const previewF = (doc: Record<string, unknown>): string =>
-  `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL({ doc })}`
+const previewF =
+  (prefix: string) =>
+  (doc: Record<string, unknown>): string =>
+    `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL(prefix)({ doc })}`
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    preview: previewF,
+    preview: previewF(''),
   },
   versions: {
     drafts: true,
   },
   access: defaultAccess,
   hooks: {
-    afterChange: [revalidatePage],
+    afterChange: [revalidatePage('')],
   },
   fields: [
     {
@@ -45,19 +47,20 @@ export const Pages: CollectionConfig = {
   ],
 }
 
+const EVENTS_PREFIX = 'events'
 export const Events: CollectionConfig = {
-  slug: 'events',
+  slug: EVENTS_PREFIX,
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    preview: previewF,
+    preview: previewF(EVENTS_PREFIX),
   },
   versions: {
     drafts: true,
   },
   access: defaultAccess,
   hooks: {
-    afterChange: [revalidatePage],
+    afterChange: [revalidatePage(EVENTS_PREFIX)],
   },
   fields: [
     {
