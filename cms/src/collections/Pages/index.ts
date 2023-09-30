@@ -7,7 +7,9 @@ import { formatAppURL, revalidatePage } from './hooks/revalidatePage'
 
 const previewF =
   (prefix: string) =>
-  (doc: Record<string, unknown>): string =>
+  (doc: {
+      slug: string
+  }): string =>
     `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL(prefix)({ doc })}`
 
 export const Pages: CollectionConfig = {
