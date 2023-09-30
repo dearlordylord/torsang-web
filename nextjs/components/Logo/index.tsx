@@ -1,10 +1,10 @@
 import React from 'react'
+import { cx } from 'emotion'
 import Image from 'next/image'
 
 import logo from '../../public/tf-logo-05.png'
 
 import classes from './index.module.scss'
-import { cx } from "emotion";
 
 const CSS_LOGO_CSS_PROPERTY_NAME = '--css-logo-size-px' as const
 
