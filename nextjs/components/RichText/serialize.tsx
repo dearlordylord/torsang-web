@@ -1,9 +1,9 @@
 import React, { FC, Fragment, useCallback } from 'react'
 import escapeHTML from 'escape-html'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Text } from 'slate'
-import dynamic from 'next/dynamic'
-const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 import useNextjsLightbox from '../../features/lightbox/nextjsUseLightbox'
 import { LocationMap } from '../Map'
@@ -106,11 +106,9 @@ const serialize = (children: Children): React.ReactElement[] =>
       case 'li':
         return <li key={i}>{serialize(node.children)}</li>
       case 'link':
-        const isYoutube = node.url?.includes('youtube.com');
+        const isYoutube = node.url?.includes('youtube.com')
         if (isYoutube) {
-          return (
-            <ReactPlayer url={escapeHTML(node.url)} />
-          )
+          return <ReactPlayer url={escapeHTML(node.url)} />
         }
         return (
           <a href={escapeHTML(node.url)} key={i}>
