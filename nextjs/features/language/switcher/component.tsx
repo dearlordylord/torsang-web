@@ -4,7 +4,7 @@ import { GB, TH } from 'country-flag-icons/react/3x2'
 import { useRouter } from 'next/router'
 
 import styles from './component.module.scss'
-import { cx } from 'emotion'
+import { cx } from '@emotion/css'
 
 const eqSet = <T,>(xs: Set<T>, ys: Set<T>) => xs.size === ys.size && [...xs].every(x => ys.has(x))
 
