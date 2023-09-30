@@ -1,19 +1,19 @@
 import React from 'react'
 import { GetStaticPaths } from 'next'
 
-import { Gutter } from '../components/Gutter'
-import RichText from '../components/RichText'
-import { Children } from '../components/RichText/serialize'
-import { LightboxContextProvider } from '../features/lightbox/provider'
-import { makeGetStaticPaths, makeGetStaticProps } from '../features/staticProps/utils'
-import type { MainMenu, Page as PageType } from '../payload-types'
+import { Gutter } from '../../components/Gutter'
+import RichText from '../../components/RichText'
+import { Children } from '../../components/RichText/serialize'
+import { LightboxContextProvider } from '../../features/lightbox/provider'
+import { makeGetStaticPaths, makeGetStaticProps } from '../../features/staticProps/utils'
+import type { Event, MainMenu } from '../../payload-types'
 
-import classes from './index.module.scss'
+import classes from '../index.module.scss'
 
-const CMS_COLLECTION_SLUG = 'pages' as const
+const CMS_COLLECTION_SLUG = 'events' as const
 
-const Page: React.FC<
-  PageType & {
+const Event: React.FC<
+  Event & {
     mainMenu: MainMenu
     preview?: boolean
   }
@@ -29,7 +29,7 @@ const Page: React.FC<
   )
 }
 
-export default Page
+export default Event
 
 export const getStaticProps = makeGetStaticProps(CMS_COLLECTION_SLUG)
 

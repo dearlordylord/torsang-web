@@ -1,7 +1,8 @@
 import type { Payload } from 'payload'
+
+import { home, homeTh } from './home'
 import { examplePage } from './page'
 import { examplePageDraft } from './pageDraft'
-import { home, homeTh } from './home';
 
 export const seed = async (payload: Payload): Promise<void> => {
   await payload.create({
@@ -25,39 +26,44 @@ export const seed = async (payload: Payload): Promise<void> => {
   })
 
   const homepageJSON = JSON.parse(JSON.stringify(home).replace('{{DRAFT_PAGE_ID}}', examplePageID))
-  const homepageThJSON = JSON.parse(JSON.stringify(homeTh).replace('{{DRAFT_PAGE_ID}}', examplePageID))
+  const homepageThJSON = JSON.parse(
+    JSON.stringify(homeTh).replace('{{DRAFT_PAGE_ID}}', examplePageID),
+  )
 
-  const [enHomepage] = await Promise.all([payload.create({
+  const [enHomepage] = await Promise.all([
+    payload.create({
       collection: 'pages',
       data: homepageJSON,
       locale: 'en',
-    }), payload.updateGlobal({
-    slug: 'main-menu',
-    locale: 'en',
-    data: {
-      navItems: [
-        {
-          link: {
-            type: 'custom',
-            reference: null,
-            label: 'Dashboard',
-            url: 'http://localhost:8000/admin',
-          },
-        },
-        {
-          link: {
-            type: 'reference',
-            reference: {
-              relationTo: 'pages',
-              value: examplePageID,
+    }),
+    payload.updateGlobal({
+      slug: 'main-menu',
+      locale: 'en',
+      data: {
+        navItems: [
+          {
+            link: {
+              type: 'custom',
+              reference: null,
+              label: 'Dashboard',
+              url: 'http://localhost:8000/admin',
             },
-            label: 'Example Page (en)',
-            url: '',
           },
-        },
-      ],
-    },
-  })]);
+          {
+            link: {
+              type: 'reference',
+              reference: {
+                relationTo: 'pages',
+                value: examplePageID,
+              },
+              label: 'Example Page (en)',
+              url: '',
+            },
+          },
+        ],
+      },
+    }),
+  ])
 
   // has to go sequentially
   await payload.updateGlobal({
@@ -86,7 +92,7 @@ export const seed = async (payload: Payload): Promise<void> => {
         },
       ],
     },
-  });
+  })
 
   await payload.update({
     id: enHomepage.id,
@@ -94,6 +100,4 @@ export const seed = async (payload: Payload): Promise<void> => {
     data: homepageThJSON,
     locale: 'th',
   })
-
-
 }

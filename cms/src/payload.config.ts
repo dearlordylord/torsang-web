@@ -1,12 +1,13 @@
-import { buildConfig } from 'payload/config'
-import path from 'path'
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
 import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3'
-import { Users } from './collections/Users'
-import { Pages } from './collections/Pages'
-import { MainMenu } from './globals/MainMenu'
+import path from 'path'
+import { buildConfig } from 'payload/config'
+
 import { Media } from './collections/Media'
-console.log('process.env.S3_BUCKETprocess.env.S3_BUCKET', process.env.S3_BUCKET)
+import { Events, Pages } from './collections/Pages'
+import { Users } from './collections/Users'
+import { MainMenu } from './globals/MainMenu'
+
 const storageAdapter = s3Adapter({
   config: {
     region: process.env.S3_REGION,
@@ -20,9 +21,19 @@ const storageAdapter = s3Adapter({
 })
 
 export default buildConfig({
-  collections: [Pages, Users, Media],
-  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL, process.env.PAYLOAD_PUBLIC_SITE_URL],
-  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL, process.env.PAYLOAD_PUBLIC_SITE_URL],
+  collections: [Pages, Events, Users, Media],
+  cors: [
+    process.env.PAYLOAD_PUBLIC_SERVER_URL,
+    process.env.PAYLOAD_PUBLIC_SITE_URL,
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ],
+  csrf: [
+    process.env.PAYLOAD_PUBLIC_SERVER_URL,
+    process.env.PAYLOAD_PUBLIC_SITE_URL,
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ],
   globals: [MainMenu],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
@@ -30,18 +41,15 @@ export default buildConfig({
   plugins: [
     cloudStorage({
       collections: {
-        'media': {
+        media: {
           prefix: `${process.env.NODE_ENV || 'development'}/media/`,
-          adapter: storageAdapter
+          adapter: storageAdapter,
         },
       },
     }),
   ],
   localization: {
-    locales: [
-      'en',
-      'th'
-    ],
+    locales: ['en', 'th'],
     defaultLocale: 'en',
     fallback: true,
   },

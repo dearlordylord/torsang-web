@@ -1,11 +1,12 @@
-import { CollectionConfig } from 'payload/types';
-import { defaultAccess } from '../access/default';
+import type { CollectionConfig } from 'payload/types'
+
+import { defaultAccess } from '../access/default'
 
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
     ...defaultAccess,
-    read: () => true
+    read: () => true,
   },
   upload: {
     disableLocalStorage: true,
@@ -39,5 +40,4 @@ export const Media: CollectionConfig = {
     mimeTypes: ['image/*'],
   },
   fields: [],
-};
-
+}

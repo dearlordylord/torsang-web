@@ -149,6 +149,5 @@ export const homeTh: Partial<Page> = {
         },
       ],
     },
-  ]}
-
-
+  ],
+}
