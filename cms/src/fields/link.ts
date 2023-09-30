@@ -65,7 +65,7 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
                 alignSelf: 'flex-end',
               },
             },
-          },
+          }
         ],
       },
     ],
