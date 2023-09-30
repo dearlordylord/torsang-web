@@ -3123,6 +3123,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"emotion@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "emotion@npm:11.0.0"
+  checksum: ab160e73785c49216652ba85e33db6d4426fd7cb28bd5341fea42542e4e24dd671e508226bf4f8dbd99b946fff2e1f1441c58169356659e60f89dc2276f97993
+  languageName: node
+  linkType: hard
+
 "encodeurl@npm:~1.0.2":
   version: 1.0.2
   resolution: "encodeurl@npm:1.0.2"
@@ -6119,6 +6126,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.51.0
     "@typescript-eslint/parser": ^5.51.0
     country-flag-icons: ^1.5.7
+    emotion: ^11.0.0
     escape-html: ^1.0.3
     eslint: 8.25.0
     eslint-config-prettier: ^8.5.0

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "country-flag-icons": "^1.5.7",
+    "emotion": "^11.0.0",
     "escape-html": "^1.0.3",
     "next": "^13.5.3",
     "payload-admin-bar": "^1.0.5",
