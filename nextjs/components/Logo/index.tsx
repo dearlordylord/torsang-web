@@ -1,5 +1,5 @@
 import React from 'react'
-import { cx } from 'emotion'
+import { cx } from '@emotion/css'
 import Image from 'next/image'
 
 import logo from '../../public/tf-logo-05.png'
