@@ -46,7 +46,7 @@
     "nodemon": "^2.0.6",
     "prettier": "^2.7.1",
     "ts-node": "^9.1.1",
-    "typescript": "^5.2.1-rc"
+    "typescript": "5.2.1-rc"
   },
   "packageManager": "yarn@3.6.3",
   "engines": {
