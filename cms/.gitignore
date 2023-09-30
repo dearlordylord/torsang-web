@@ -3,4 +3,9 @@ dist
 node_modules
 package-lock.json
 .env
-.yarn
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions

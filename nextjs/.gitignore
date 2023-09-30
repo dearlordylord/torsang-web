@@ -5,4 +5,9 @@ node_modules
 .env
 out
 package-lock.json
-.yarn
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
