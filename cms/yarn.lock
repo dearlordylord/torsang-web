@@ -9244,7 +9244,6 @@ __metadata:
     payload: ^1.15.6
     prettier: ^2.7.1
     ts-node: ^9.1.1
-    typescript: 5.2.1-rc
   languageName: unknown
   linkType: soft
 
@@ -12233,26 +12232,6 @@ __metadata:
     for-each: ^0.3.3
     is-typed-array: ^1.1.9
   checksum: 2228febc93c7feff142b8c96a58d4a0d7623ecde6c7a24b2b98eb3170e99f7c7eff8c114f9b283085cd59dcd2bd43aadf20e25bba4b034a53c5bb292f71f8956
-  languageName: node
-  linkType: hard
-
-"typescript@npm:5.2.1-rc":
-  version: 5.2.1-rc
-  resolution: "typescript@npm:5.2.1-rc"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 0bea857151b74d76d36af16e77ad348b1fbf9630b0002be4cda9713fee692e50e2faa5d1d63fccbc3e3a4999e0356c0b722d993344ab0d014ecfc4d500b178ca
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@5.2.1-rc#~builtin<compat/typescript>":
-  version: 5.2.1-rc
-  resolution: "typescript@patch:typescript@npm%3A5.2.1-rc#~builtin<compat/typescript>::version=5.2.1-rc&hash=f3b441"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: cce9af097f858e1f2e36fa9d958b8b8846a37a887e14f51aa06330f67d7a3f16c74770b709bbbfe945a7eb7dcb9a59503136e324139b360294db45b55c7be79f
   languageName: node
   linkType: hard
 
