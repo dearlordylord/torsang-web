@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps<Props> = async (
   const q = QueryString.stringify({
     locale,
   })
-  const pageReq = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/${collectionSlug}/all${q}`, {
+  const pageReq = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/${collectionSlug}/all?${q}`, {
     headers: {
       ...(preview
         ? {
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<Props> = async (
   })
 
   if (!pageReq.ok) {
-    throw new Error(`Failed to fetch ${collectionSlug} from CMS`)
+    throw new Error(`Failed to fetch ${collectionSlug} from CMS: ` + (await pageReq.text()))
   }
   return {
     props: {
@@ -46,7 +46,6 @@ export const getStaticProps: GetStaticProps<Props> = async (
   }
 }
 
-// TODO 1-time and recurring events
 const Events: React.FC<Props> = props => {
   return (
     <Gutter>

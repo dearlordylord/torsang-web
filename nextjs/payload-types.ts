@@ -30,7 +30,9 @@ export interface Page {
 }
 export interface Event {
   id: string;
-  date: string;
+  date?: string;
+  isRecurring?: boolean;
+  recurringOrder?: number;
   title: string;
   slug?: string;
   richText: {
