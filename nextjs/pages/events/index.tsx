@@ -1,11 +1,11 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
+import * as QueryString from 'querystring'
 
 import { Gutter } from '../../components/Gutter'
 import { LightboxContextProvider } from '../../features/lightbox/provider'
 import { Event } from '../../payload-types'
-import * as QueryString from "querystring";
 
 type Props = {
   docs: Event[]
@@ -24,20 +24,17 @@ export const getStaticProps: GetStaticProps<Props> = async (
       payloadToken: string
     }) || {}
   const q = QueryString.stringify({
-    locale
-  });
-  const pageReq = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_URL}/api/${collectionSlug}/all${q}`,
-    {
-      headers: {
-        ...(preview
-          ? {
-              Authorization: `JWT ${payloadToken}`,
-            }
-          : {}),
-      },
+    locale,
+  })
+  const pageReq = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/${collectionSlug}/all${q}`, {
+    headers: {
+      ...(preview
+        ? {
+            Authorization: `JWT ${payloadToken}`,
+          }
+        : {}),
     },
-  )
+  })
 
   if (!pageReq.ok) {
     throw new Error(`Failed to fetch ${collectionSlug} from CMS`)
