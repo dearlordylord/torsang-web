@@ -23,18 +23,15 @@ export const getStaticProps: GetStaticProps<Props> = async (
     (previewData as {
       payloadToken: string
     }) || {}
-  const pageReq = await fetch(
-    `${process.env.NEXT_PUBLIC_CMS_URL}/api/${collectionSlug}?limit=100`,
-    {
-      headers: {
-        ...(preview
-          ? {
-              Authorization: `JWT ${payloadToken}`,
-            }
-          : {}),
-      },
+  const pageReq = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/${collectionSlug}/all`, {
+    headers: {
+      ...(preview
+        ? {
+            Authorization: `JWT ${payloadToken}`,
+          }
+        : {}),
     },
-  )
+  })
 
   if (!pageReq.ok) {
     throw new Error(`Failed to fetch ${collectionSlug} from CMS`)
@@ -47,6 +44,7 @@ export const getStaticProps: GetStaticProps<Props> = async (
   }
 }
 
+// TODO 1-time and recurring events
 const Events: React.FC<Props> = props => {
   return (
     <Gutter>

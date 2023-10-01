@@ -7,9 +7,7 @@ import { formatAppURL, revalidatePage } from './hooks/revalidatePage'
 
 const previewF =
   (prefix: string) =>
-  (doc: {
-      slug: string
-  }): string =>
+  (doc: { slug: string }): string =>
     `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL(prefix)({ doc })}`
 
 export const Pages: CollectionConfig = {
@@ -68,7 +66,17 @@ export const Events: CollectionConfig = {
     {
       name: 'date',
       type: 'date',
-      required: true,
+      required: false,
+    },
+    {
+      name: 'isRecurring',
+      type: 'checkbox',
+      required: false,
+    },
+    {
+      name: 'recurringOrder',
+      type: 'number',
+      required: false,
     },
     {
       name: 'title',
@@ -89,5 +97,38 @@ export const Events: CollectionConfig = {
       },
     },
     richText(),
+  ],
+  endpoints: [
+    {
+      path: '/all',
+      method: 'get',
+      handler: async (req, res) => {
+        // https://github.com/payloadcms/payload/discussions/2089
+        const [ongoing, singular] = await Promise.all([
+          req.payload.find({
+            collection: EVENTS_PREFIX,
+            where: {
+              isRecurring: {
+                equals: true,
+              },
+            },
+            sort: '-date',
+          }),
+          req.payload.find({
+            collection: EVENTS_PREFIX,
+            where: {
+              isRecurring: {
+                not_equals: true,
+              },
+            },
+            sort: 'recurringOrder',
+            limit: 100,
+          }),
+        ])
+        res.json({
+          docs: [...ongoing.docs, ...singular.docs],
+        })
+      },
+    },
   ],
 }
