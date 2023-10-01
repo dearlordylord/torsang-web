@@ -1,9 +1,13 @@
 import React from 'react'
+import { format, parse } from 'date-fns'
+import enGb from 'date-fns/locale/en-GB'
+import thTh from 'date-fns/locale/th'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import * as QueryString from 'querystring'
 
 import { Gutter } from '../../components/Gutter'
+import { useLocaleOrDefault } from '../../features/language/switcher/hook'
 import { LightboxContextProvider } from '../../features/lightbox/provider'
 import { Event } from '../../payload-types'
 
@@ -46,14 +50,32 @@ export const getStaticProps: GetStaticProps<Props> = async (
   }
 }
 
+// date-fns cannot buddhist dates
+const locales = {
+  en: 'en-GB',
+  th: 'th-TH',
+} as const
+
 const Events: React.FC<Props> = props => {
+  const locale = useLocaleOrDefault()
   return (
     <Gutter>
       <LightboxContextProvider>
         <div>Events: </div>
         {props.docs.map(doc => (
           <div key={doc.id}>
-            <Link href={`/events/${doc.slug}`}>{doc.title}</Link>
+            <Link href={`/events/${doc.slug}`}>
+              {doc.title}
+              {doc.isRecurring ? null : (
+                <span>
+                  {' '}
+                  at{' '}
+                  {parse(doc.date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", new Date()).toLocaleDateString(
+                    locales[locale] || locales['en'],
+                  )}
+                </span>
+              )}
+            </Link>
           </div>
         ))}
       </LightboxContextProvider>

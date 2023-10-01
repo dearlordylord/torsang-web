@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/css": "^11.11.2",
     "country-flag-icons": "^1.5.7",
+    "date-fns": "^2.30.0",
     "escape-html": "^1.0.3",
     "next": "^13.5.3",
     "payload-admin-bar": "^1.0.5",
