@@ -69,7 +69,7 @@ const Events: React.FC<Props> = props => {
               {doc.isRecurring ? null : (
                 <span>
                   {' '}
-                  at{' '}
+                  on{' '}
                   {parse(doc.date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", new Date()).toLocaleDateString(
                     locales[locale] || locales['en'],
                   )}
