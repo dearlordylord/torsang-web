@@ -110,6 +110,10 @@ const serialize = (children: Children): React.ReactElement[] =>
         if (isYoutube) {
           return <ReactPlayer url={escapeHTML(node.url)} />
         }
+        const isGoogleMap = node.url?.includes('google.com/maps/embed')
+        if (isGoogleMap) {
+          return <LocationMap url={escapeHTML(node.url)} />
+        }
         return (
           <a href={escapeHTML(node.url)} key={i}>
             {serialize(node.children)}
