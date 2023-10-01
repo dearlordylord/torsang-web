@@ -113,6 +113,7 @@ export const Events: CollectionConfig = {
               },
             },
             sort: '-date',
+            locale: req.locale,
           }),
           req.payload.find({
             collection: EVENTS_PREFIX,
@@ -122,6 +123,7 @@ export const Events: CollectionConfig = {
               },
             },
             sort: 'recurringOrder',
+            locale: req.locale,
             limit: 100,
           }),
         ])
