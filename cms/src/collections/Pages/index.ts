@@ -112,7 +112,7 @@ export const Events: CollectionConfig = {
                 equals: true,
               },
             },
-            sort: '-date',
+            sort: 'date',
             ...(req.locale ? { locale: req.locale } : {}),
           }),
           req.payload.find({
