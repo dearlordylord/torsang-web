@@ -8,7 +8,6 @@ import { Event } from '../../payload-types'
 import * as QueryString from "querystring";
 
 type Props = {
-  test: string
   docs: Event[]
 }
 
