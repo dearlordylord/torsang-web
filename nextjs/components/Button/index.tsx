@@ -48,9 +48,7 @@ export const Button: React.FC<Props> = ({
 
   if (el === 'link') {
     return (
-      <Link href={href} className={className} {...newTabProps} onClick={onClick}>
-        <>{content}</>
-      </Link>
+      <>link</>
     )
   }
 
