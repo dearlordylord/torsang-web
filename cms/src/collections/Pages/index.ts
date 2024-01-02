@@ -112,7 +112,7 @@ export const Events: CollectionConfig = {
                 equals: true,
               },
             },
-              sort: 'recurringOrder',
+            sort: 'recurringOrder',
             ...(req.locale ? { locale: req.locale } : {}),
           }),
           req.payload.find({
@@ -122,7 +122,7 @@ export const Events: CollectionConfig = {
                 not_equals: true,
               },
             },
-              sort: '-date',
+            sort: '-date',
 
             ...(req.locale ? { locale: req.locale } : {}),
             limit: 100,
