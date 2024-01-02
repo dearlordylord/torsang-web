@@ -15,10 +15,6 @@ const flagComponents = [
 
 export const LanguageSwitcher = () => {
   const { all, set, current, loading } = useLanguageSwitcher()
-  const handleLanguageChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const language = event.target.value
-    await set(language)
-  }
 
   return (
     <div>

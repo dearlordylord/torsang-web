@@ -3,34 +3,54 @@ import { CookiesProvider } from 'react-cookie'
 import App, { AppContext, AppProps as NextAppProps } from 'next/app'
 import { NextRouter, useRouter } from 'next/router'
 import Script from 'next/script'
+import Head from 'next/head'
 
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { getLocaleOrDefault } from '../features/language/switcher/hook'
-import { MainMenu } from '../payload-types'
+import { MainMenu, Meta } from '../payload-types';
 
 import '../css/app.scss'
 
 import styles from './index.module.scss'
 
 export interface IGlobals {
-  mainMenu: MainMenu
+  mainMenu: MainMenu,
+  meta: Meta
 }
 
 export const getAllGlobals = async (router: NextRouter): Promise<IGlobals> => {
   const locale = getLocaleOrDefault(router)
-  const res = await fetch(
+  const mmres = fetch(
     `${process.env.NEXT_PUBLIC_CMS_URL}/api/globals/main-menu?depth=1&locale=${locale}`,
   )
-  const mainMenu = await res.json()
+  const mres = fetch(
+    `${process.env.NEXT_PUBLIC_CMS_URL}/api/globals/meta?depth=1&locale=${locale}`,
+  )
+  const [mainMenu, meta] = await Promise.all([mmres, mres]).then(async ([mmres, mres]) => [
+    await mmres.json(),
+    await mres.json(),
+  ])
   return {
     mainMenu,
+    meta
   }
 }
 
 type AppProps<P = any> = {
   pageProps: P
 } & Omit<NextAppProps<P>, 'pageProps'>
+
+const Metas = ({ globals }: { globals: IGlobals }) => {
+  const { meta } = globals
+  const title = meta.title || 'Torsang';
+  return (
+    <Head>
+      <title>{title}</title>
+      <meta property="og:title" content={title} key="title" />
+    </Head>
+  )
+}
 
 const PayloadApp = (
   appProps: AppProps & {
@@ -70,6 +90,7 @@ gtag('config', 'G-V6VZ2D1FER');
           `}
         </Script>
       </>
+      <Metas globals={globals} />
       <div className={styles.wrapper}>
         <Header
           globals={globals}

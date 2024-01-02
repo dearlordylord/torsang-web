@@ -7,6 +7,7 @@ import { Media } from './collections/Media'
 import { Events, Pages } from './collections/Pages'
 import { Users } from './collections/Users'
 import { MainMenu } from './globals/MainMenu'
+import { Meta } from './globals/Meta';
 
 const storageAdapter = s3Adapter({
   config: {
@@ -34,7 +35,7 @@ export default buildConfig({
     'http://localhost:3000',
     'http://localhost:3001',
   ],
-  globals: [MainMenu],
+  globals: [MainMenu, Meta],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

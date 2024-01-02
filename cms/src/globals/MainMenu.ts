@@ -2,8 +2,10 @@ import type { GlobalConfig } from 'payload/types'
 
 import link from '../fields/link'
 
+export const MAIN_MENU_SLUG = 'main-menu' as const;
+
 export const MainMenu: GlobalConfig = {
-  slug: 'main-menu',
+  slug: MAIN_MENU_SLUG,
   access: {
     read: () => true,
   },

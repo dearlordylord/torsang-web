@@ -15,6 +15,7 @@ export interface Config {
   };
   globals: {
     'main-menu': MainMenu;
+    meta: Meta;
   };
 }
 export interface Page {
@@ -108,6 +109,12 @@ export interface MainMenu {
     };
     id?: string;
   }[];
+  updatedAt?: string;
+  createdAt?: string;
+}
+export interface Meta {
+  id: string;
+  title?: string;
   updatedAt?: string;
   createdAt?: string;
 }
