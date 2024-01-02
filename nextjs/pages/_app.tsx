@@ -39,33 +39,27 @@ type AppProps<P = any> = {
   pageProps: P
 } & Omit<NextAppProps<P>, 'pageProps'>
 
-const Locales = ({locales, locale, asPath}: {locales: string[], locale: string, asPath: string}) => {
+
+const Metas = ({ globals, locales, locale, asPath }: { globals: IGlobals, locales: string[], locale: string, asPath: string }) => {
+  const { meta } = globals
+  const title = meta.title || 'Torsang'
+  const publicUrl = process.env.NEXT_PUBLIC_URL || (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : '');
   return (
-    <>
-      {locales.filter(loc => loc !== 'en'/*default locale in settings*/).map((loc) => (
+    <Head>
+      <title>{title}</title>
+      <meta property="og:title" content={title} key="title" />
+      {url && locales.filter(loc => loc !== 'en'/*default locale in settings*/).map((loc) => (
         <link
           key={loc}
           rel="alternate"
           hrefLang={loc}
-          href={`${process.env.NEXT_PUBLIC_CMS_URL}/${loc}${
+          href={`${publicUrl}/${loc}${
             // sub path routing https://nextjs.org/docs/pages/building-your-application/routing/internationalization#sub-path-routing
             asPath
           }`}
         />
       ))}
       <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_CMS_URL}`} />
-    </>
-  )
-}
-
-const Metas = ({ globals, locales, locale, asPath }: { globals: IGlobals, locales: string[], locale: string, asPath: string }) => {
-  const { meta } = globals
-  const title = meta.title || 'Torsang'
-  return (
-    <Head>
-      <title>{title}</title>
-      <meta property="og:title" content={title} key="title" />
-      <Locales locales={locales} locale={locale} asPath={asPath} />
     </Head>
   )
 }
