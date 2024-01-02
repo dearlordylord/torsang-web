@@ -48,7 +48,7 @@ const Metas = ({ globals, locales, locale, asPath }: { globals: IGlobals, locale
     <Head>
       <title>{title}</title>
       <meta property="og:title" content={title} key="title" />
-      {url && locales.filter(loc => loc !== 'en'/*default locale in settings*/).map((loc) => (
+      {publicUrl && locales.filter(loc => loc !== 'en'/*default locale in settings*/).map((loc) => (
         <link
           key={loc}
           rel="alternate"
