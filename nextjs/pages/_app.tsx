@@ -39,6 +39,27 @@ type AppProps<P = any> = {
   pageProps: P
 } & Omit<NextAppProps<P>, 'pageProps'>
 
+const Locales = () => {
+  const router = useRouter()
+  const { locales, locale } = router
+  return (
+    <>
+      {locales.filter(loc => loc !== 'en'/*default locale in settings*/).map((loc) => (
+        <link
+          key={loc}
+          rel="alternate"
+          hrefLang={loc}
+          href={`${process.env.NEXT_PUBLIC_CMS_URL}/${loc}${
+            // sub path routing https://nextjs.org/docs/pages/building-your-application/routing/internationalization#sub-path-routing
+            router.asPath
+          }`}
+        />
+      ))}
+      <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_CMS_URL}`} />
+    </>
+  )
+}
+
 const Metas = ({ globals }: { globals: IGlobals }) => {
   const { meta } = globals
   const title = meta.title || 'Torsang'
@@ -46,6 +67,7 @@ const Metas = ({ globals }: { globals: IGlobals }) => {
     <Head>
       <title>{title}</title>
       <meta property="og:title" content={title} key="title" />
+      <Locales/>
     </Head>
   )
 }
