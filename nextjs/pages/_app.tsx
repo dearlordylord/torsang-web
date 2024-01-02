@@ -39,9 +39,7 @@ type AppProps<P = any> = {
   pageProps: P
 } & Omit<NextAppProps<P>, 'pageProps'>
 
-const Locales = () => {
-  const router = useRouter()
-  const { locales, locale } = router
+const Locales = ({locales, locale, asPath}: {locales: string[], locale: string, asPath: string}) => {
   return (
     <>
       {locales.filter(loc => loc !== 'en'/*default locale in settings*/).map((loc) => (
@@ -51,7 +49,7 @@ const Locales = () => {
           hrefLang={loc}
           href={`${process.env.NEXT_PUBLIC_CMS_URL}/${loc}${
             // sub path routing https://nextjs.org/docs/pages/building-your-application/routing/internationalization#sub-path-routing
-            router.asPath
+            asPath
           }`}
         />
       ))}
@@ -60,14 +58,14 @@ const Locales = () => {
   )
 }
 
-const Metas = ({ globals }: { globals: IGlobals }) => {
+const Metas = ({ globals, locales, locale, asPath }: { globals: IGlobals, locales: string[], locale: string, asPath: string }) => {
   const { meta } = globals
   const title = meta.title || 'Torsang'
   return (
     <Head>
       <title>{title}</title>
       <meta property="og:title" content={title} key="title" />
-      <Locales/>
+      <Locales locales={locales} locale={locale} asPath={asPath} />
     </Head>
   )
 }
@@ -110,7 +108,7 @@ gtag('config', 'G-V6VZ2D1FER');
           `}
         </Script>
       </>
-      <Metas globals={globals} />
+      <Metas globals={globals} locales={router.locales} locale={router.locale} asPath={router.asPath} />
       <div className={styles.wrapper}>
         <Header
           globals={globals}
