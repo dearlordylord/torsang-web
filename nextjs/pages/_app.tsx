@@ -59,7 +59,7 @@ const Metas = ({ globals, locales, locale, asPath }: { globals: IGlobals, locale
           }`}
         />
       ))}
-      <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_CMS_URL}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${publicUrl}`} />
     </Head>
   )
 }
