@@ -58,6 +58,19 @@ const locales = {
 
 const Events: React.FC<Props> = props => {
   const locale = useLocaleOrDefault()
+
+  // Fix bfcache issue: reload when page is restored from back button
+  React.useEffect(() => {
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        // Page was restored from bfcache, reload to get fresh data
+        window.location.reload()
+      }
+    }
+    window.addEventListener('pageshow', handlePageShow)
+    return () => window.removeEventListener('pageshow', handlePageShow)
+  }, [])
+
   return (
     <Gutter>
       <LightboxContextProvider>
