@@ -16,7 +16,7 @@ const storageAdapter = s3Adapter({
       accessKeyId: process.env.S3_ACCESS_KEY_ID,
       secretAccessKey: process.env.S3_SECRET_KEY,
     },
-    // ... Other S3 configuration
+    endpoint: `https://s3.${process.env.S3_REGION}.amazonaws.com`,
   },
   bucket: process.env.S3_BUCKET,
 })
@@ -45,7 +45,6 @@ export default buildConfig({
         media: {
           prefix: `${process.env.NODE_ENV || 'development'}/media/`,
           adapter: storageAdapter,
-          disablePayloadAccessControl: true,
         },
       },
     }),
