@@ -45,6 +45,7 @@ export default buildConfig({
         media: {
           prefix: `${process.env.NODE_ENV || 'development'}/media/`,
           adapter: storageAdapter,
+          disablePayloadAccessControl: true,
         },
       },
     }),
